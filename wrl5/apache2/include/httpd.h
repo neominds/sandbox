@@ -1418,6 +1418,28 @@ AP_DECLARE(char *) ap_getword_conf(apr_pool_t *p, const char **line);
  */
 AP_DECLARE(char *) ap_getword_conf_nc(apr_pool_t *p, char **line);
 
+/* Scan a string for field content chars, as defined by RFC7230 section 3.2
+ * including VCHAR/obs-text, as well as HT and SP
+ * @param ptr The string to scan
+ * @return A pointer to the first (non-HT) ASCII ctrl character.
+ * @note lws and trailing whitespace are scanned, the caller is responsible
+ * for trimming leading and trailing whitespace
+ */
+AP_DECLARE(const char *) ap_scan_http_field_content(const char *ptr);
+
+/* Scan a string for token characters, as defined by RFC7230 section 3.2.6 
+ * @param ptr The string to scan
+ * @return A pointer to the first non-token character.
+ */
+AP_DECLARE(const char *) ap_scan_http_token(const char *ptr);
+
+/* Scan a string for visible ASCII (0x21-0x7E) or obstext (0x80+)
+ * and return a pointer to the first SP/CTL/NUL character encountered.
+ * @param ptr The string to scan
+ * @return A pointer to the first SP/CTL character.
+ */
+AP_DECLARE(const char *) ap_scan_vchar_obstext(const char *ptr);
+
 /**
  * Check a string for any config define or environment variable construct
  * and replace each of them by the value of that variable, if it exists.

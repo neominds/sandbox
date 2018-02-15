@@ -6,6 +6,9 @@
 #define T_ESCAPE_LOGITEM       (16)
 #define T_ESCAPE_FORENSIC      (32)
 #define T_ESCAPE_URLENCODED    (64)
+#define T_HTTP_CTRLS           (128)
+#define T_VCHAR_OBSTEXT        (256)
+
 
 static const unsigned char test_char_table[256] = {
     32,126,126,126,126,126,126,126,126,126,127,126,126,126,126,126,126,126,126,126,
